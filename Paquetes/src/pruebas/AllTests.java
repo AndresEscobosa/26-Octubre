@@ -5,6 +5,9 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /*
+ * 
+ * NOTA: FORMA DE CREA TestSuite EN JUNIT 4 Y JUNIT 5.
+ * 
  * Esto se llama TestSuite, es un conjunto de TestCase agrupados.
  * Generalmente los test automatizados se encuentran separados lo cual es bastante 
  * dificil probar uno por uno.
