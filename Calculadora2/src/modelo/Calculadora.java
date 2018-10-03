@@ -22,7 +22,7 @@ public class Calculadora{
 		this.ope = ope;
 	}
 	
-	public double operacion(double ope1,double ope2) {
+	public float operacion(float ope1,float ope2) {
 		return ope.resultado(ope1, ope2);
 		
 	}

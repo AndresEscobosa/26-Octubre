@@ -1,10 +1,9 @@
 package vistas;
 
-import controlador.ControlBoton;
 
 public interface Interfaz {
 
-	public abstract double getOperador1();
-	public abstract double getOperador2();
-	public abstract void setResultado(double res);
+	public abstract float getOperador1();
+	public abstract float getOperador2();
+	public abstract void setResultado(float res);
 }

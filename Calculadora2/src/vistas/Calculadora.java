@@ -16,10 +16,8 @@ import javax.swing.BoxLayout;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
-import java.util.Observable;
-import java.util.Observer;
 
-public class Calculadora extends JFrame  implements Interfaz,Observer{
+public class Calculadora extends JFrame  implements Interfaz{
 
 	private JPanel contentPane;
 	private JTextField txtOperador1;
@@ -137,30 +135,22 @@ public class Calculadora extends JFrame  implements Interfaz,Observer{
 	}
 
 	@Override
-	public double getOperador1() {
+	public float getOperador1() {
 		// TODO Auto-generated method stub
-		return Double.parseDouble(txtOperador1.getText());
+		return Float.parseFloat(txtOperador1.getText());
 	}
 
 	@Override
-	public double getOperador2() {
+	public float getOperador2() {
 		// TODO Auto-generated method stub
-		return Double.parseDouble(txtOperador2.getText());
+		return Float.parseFloat(txtOperador2.getText());
 	}
 
 	@Override
-	public void setResultado(double res) {
+	public void setResultado(float res) {
 		// TODO Auto-generated method stub
 		txtResultado.setText(String.valueOf(res));
 		
-	}
-
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		if(arg!=null)
-			txtResultado.setText(arg.toString());
 	}
 
 }
