@@ -55,6 +55,7 @@ public class PersonaTest extends TestCase{
 		assertAll("Valos correctos de Persona paquete 1",
 				()->assertEquals("Juan",m.getNombre()),
 				()->assertEquals(22,m.getEdad())
+
 		);
 	}
 	

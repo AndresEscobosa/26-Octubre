@@ -19,7 +19,8 @@ public class Persona {
 	public int getEdad() {
 		return edad;
 	}
-	public void setEdad(int edad) {
+	public void setEdad(int edad) throws Exception {
+		if(edad<0) throw new Exception("Edad fuera de rango");
 		this.edad = edad;
 	}
 
