@@ -12,6 +12,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
+import controlador.ControladorLista;
 import modelo.Genero;
 import modelo.Persona;
 
@@ -19,11 +20,13 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.ListSelectionModel;
 
-public class AgendaVista extends JFrame {
+public class AgendaVista extends JFrame implements AgendaInterface{
 
 	private JPanel contentPane;
 	private DefaultListModel<Persona> modelo;
+	private PersonaPanel personaPanel;
 
 	/**
 	 * Launch the application.
@@ -72,7 +75,7 @@ public class AgendaVista extends JFrame {
 		contentPane.add(panelPrincipal, BorderLayout.CENTER);
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal, BoxLayout.X_AXIS));
 		
-		PersonaPanel personaPanel = new PersonaPanel();
+		personaPanel = new PersonaPanel();
 		panelPrincipal.add(personaPanel);
 		
 		JPanel panelResultados = new JPanel();
@@ -84,20 +87,32 @@ public class AgendaVista extends JFrame {
 		panelResultados.add(scrollPane, BorderLayout.CENTER);
 		
 		JList listaResultados = new JList();
+		listaResultados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(listaResultados);
 		
 		modelo=new DefaultListModel<Persona>();
 		listaResultados.setModel(modelo);
 		
 		Persona p=new Persona("Juan", 23, "12123","12321",Genero.MASCULINO);
-		Persona p2=new Persona("Maria", 23, "12123","12321",Genero.MASCULINO);
+		Persona p2=new Persona("Maria", 23, "12123","12321",Genero.FEMENINO);
 		Persona p3=new Persona("Pedro", 23, "12123","12321",Genero.MASCULINO);
 		
 		modelo.addElement(p);
 		modelo.addElement(p2);
 		modelo.addElement(p3);
-	
+		
+		listaResultados.addListSelectionListener(new ControladorLista(this));
+		
+
 		
 	}
+
+	@Override
+	public void setPersona(Persona p) {
+		// TODO Auto-generated method stub
+		personaPanel.setDatos(p);
+		
+	}
+
 
 }

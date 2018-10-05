@@ -3,6 +3,10 @@ package vista;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
+
+import modelo.Genero;
+import modelo.Persona;
+
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -18,6 +22,10 @@ import javax.swing.JRadioButton;
 public class PersonaPanel extends JPanel{
 	private JTextField txtNombre;
 	private JFormattedTextField txtTelefono;
+	private JFormattedTextField txtEdad;
+	private JRadioButton rdbtnMasculino;
+	private JRadioButton rdbtnFemenino;
+	private JFormattedTextField txtCorreo;
 	
 	public PersonaPanel() throws ParseException {
 		setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 5, true), "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -39,7 +47,7 @@ public class PersonaPanel extends JPanel{
 		formatoNumero.setMaximumIntegerDigits(3);
 		
 		//MaskFormatter formatoNumero=new MaskFormatter("###");
-		JFormattedTextField txtEdad = new JFormattedTextField(formatoNumero);
+		txtEdad = new JFormattedTextField(formatoNumero);
 		add(txtEdad);
 		
 		JLabel lblGenero = new JLabel("Genero:");
@@ -48,10 +56,10 @@ public class PersonaPanel extends JPanel{
 		JPanel panelGenero = new JPanel();
 		add(panelGenero);
 		
-		JRadioButton rdbtnMasculino = new JRadioButton("Masculino");
+		rdbtnMasculino = new JRadioButton("Masculino");
 		panelGenero.add(rdbtnMasculino);
 		
-		JRadioButton rdbtnFemenino = new JRadioButton("Femenino");
+		rdbtnFemenino = new JRadioButton("Femenino");
 		panelGenero.add(rdbtnFemenino);
 		
 		ButtonGroup grupoGenero=new ButtonGroup();
@@ -69,9 +77,21 @@ public class PersonaPanel extends JPanel{
 		JLabel lblCorreo = new JLabel("Correo:");
 		add(lblCorreo);
 		
-		JFormattedTextField txtCorreo = new JFormattedTextField();
+		txtCorreo = new JFormattedTextField();
 		add(txtCorreo);
 		
 	}
-
+	
+	public void setDatos(Persona p) {
+		txtNombre.setText(p.getNombre());
+		txtTelefono.setText(p.getTelefono());
+		txtEdad.setText(String.valueOf(p.getEdad()));
+		txtCorreo.setText(p.getCorreo());
+		if(p.getGenero()==Genero.MASCULINO)
+			rdbtnMasculino.setSelected(true);
+		else
+			rdbtnFemenino.setSelected(true);
+	}
+	
+	
 }
