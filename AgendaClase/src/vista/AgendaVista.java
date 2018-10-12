@@ -2,6 +2,11 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.LineNumberInputStream;
+import java.io.ObjectInputStream;
 import java.text.ParseException;
 
 import javax.swing.JFrame;
@@ -12,7 +17,9 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
+import controlador.ControladorBoton;
 import controlador.ControladorLista;
+import controlador.ControladorVentana;
 import modelo.Genero;
 import modelo.Persona;
 
@@ -20,6 +27,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 public class AgendaVista extends JFrame implements AgendaInterface{
@@ -27,6 +35,7 @@ public class AgendaVista extends JFrame implements AgendaInterface{
 	private JPanel contentPane;
 	private DefaultListModel<Persona> modelo;
 	private PersonaPanel personaPanel;
+	private JList listaResultados ;
 
 	/**
 	 * Launch the application.
@@ -86,13 +95,31 @@ public class AgendaVista extends JFrame implements AgendaInterface{
 		JScrollPane scrollPane = new JScrollPane();
 		panelResultados.add(scrollPane, BorderLayout.CENTER);
 		
-		JList listaResultados = new JList();
+		listaResultados = new JList();
 		listaResultados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(listaResultados);
 		
-		modelo=new DefaultListModel<Persona>();
+		try {
+			FileInputStream file =new FileInputStream("agenda.txt");
+			ObjectInputStream ois=new ObjectInputStream(file);
+			modelo=(DefaultListModel<Persona>) ois.readObject();
+			ois.close();
+			file.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			modelo=new DefaultListModel<Persona>();
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		listaResultados.setModel(modelo);
 		
+		/*
 		Persona p=new Persona("Juan", 23, "12123","12321",Genero.MASCULINO);
 		Persona p2=new Persona("Maria", 23, "12123","12321",Genero.FEMENINO);
 		Persona p3=new Persona("Pedro", 23, "12123","12321",Genero.MASCULINO);
@@ -100,11 +127,27 @@ public class AgendaVista extends JFrame implements AgendaInterface{
 		modelo.addElement(p);
 		modelo.addElement(p2);
 		modelo.addElement(p3);
+		*/
 		
 		listaResultados.addListSelectionListener(new ControladorLista(this));
 		
-
+		ControladorBoton controlador=new ControladorBoton(this);
+		btnAgregar.setActionCommand("AGREGAR");
+		btnAgregar.addActionListener(controlador);
 		
+		
+		btnNuevo.setActionCommand("NUEVO");
+		btnNuevo.addActionListener(controlador);
+		
+		
+		btnEditar.setActionCommand("EDITAR");
+		btnEditar.addActionListener(controlador);
+		
+		btnEliminar.setActionCommand("ELIMINAR");
+		btnEliminar.addActionListener(controlador);
+		
+		addWindowListener(new ControladorVentana(this));
+				
 	}
 
 	@Override
@@ -114,5 +157,30 @@ public class AgendaVista extends JFrame implements AgendaInterface{
 		
 	}
 
+	@Override
+	public void limpiar() {
+		// TODO Auto-generated method stub
+		personaPanel.limpiarDatos();
+		listaResultados.clearSelection();
+		
+	}
+
+	@Override
+	public Persona getPersona() {
+		// TODO Auto-generated method stub
+		return personaPanel.getPersona();
+	}
+
+	@Override
+	public int getIndice() {
+		// TODO Auto-generated method stub
+		return listaResultados.getSelectedIndex();
+	}
+
+	@Override
+	public DefaultListModel<Persona> getModelo() {
+		// TODO Auto-generated method stub
+		return modelo;
+	}
 
 }

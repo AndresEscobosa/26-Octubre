@@ -93,5 +93,22 @@ public class PersonaPanel extends JPanel{
 			rdbtnFemenino.setSelected(true);
 	}
 	
+	public Persona getPersona() {
+		String nombre=txtNombre.getText();
+		String telefono=txtTelefono.getText();
+		String correo=txtCorreo.getText();
+		int edad=Integer.parseInt(txtEdad.getText());
+		Genero g=(rdbtnFemenino.isSelected())?Genero.FEMENINO:Genero.MASCULINO;
+		return new Persona(nombre, edad, telefono, correo, g);
+	}
+	
+	public void limpiarDatos() {
+		txtNombre.setText("");
+		txtTelefono.setText("");
+		txtCorreo.setText("");
+		txtEdad.setText("");
+		rdbtnFemenino.setSelected(false);
+		rdbtnMasculino.setSelected(false);
+	}
 	
 }

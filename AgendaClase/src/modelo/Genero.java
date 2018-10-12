@@ -1,5 +1,7 @@
 package modelo;
 
-public enum Genero {
+import java.io.Serializable;
+
+public enum Genero implements Serializable{
 	MASCULINO,FEMENINO;
 }

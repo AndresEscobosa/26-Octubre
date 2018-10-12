@@ -17,7 +17,8 @@ public class ControladorLista implements ListSelectionListener {
 	public void valueChanged(ListSelectionEvent e) {
 		// TODO Auto-generated method stub
 		JList lista=(JList) e.getSource();
-		vista.setPersona((Persona)lista.getSelectedValue());
+		if(lista.getSelectedIndex()!=-1)
+			vista.setPersona((Persona)lista.getSelectedValue());
 		//System.out.println(lista.getSelectedValue().toString());
 	}
 
