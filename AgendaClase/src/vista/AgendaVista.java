@@ -68,16 +68,16 @@ public class AgendaVista extends JFrame implements AgendaInterface{
 		JPanel panelBotones = new JPanel();
 		contentPane.add(panelBotones, BorderLayout.SOUTH);
 		
-		JButton btnNuevo = new JButton("Nuevo");
+		JButton btnNuevo = new MiBoton("Nuevo");
 		panelBotones.add(btnNuevo);
 		
-		JButton btnAgregar = new JButton("Agregar");
+		JButton btnAgregar = new MiBoton("Agregar");
 		panelBotones.add(btnAgregar);
 		
-		JButton btnEditar = new JButton("Editar");
+		JButton btnEditar = new MiBoton("Editar");
 		panelBotones.add(btnEditar);
 		
-		JButton btnEliminar = new JButton("Eliminar");
+		JButton btnEliminar = new MiBoton("Eliminar");
 		panelBotones.add(btnEliminar);
 		
 		JPanel panelPrincipal = new JPanel();
