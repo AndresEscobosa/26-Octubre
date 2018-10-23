@@ -91,6 +91,11 @@ public class MiBoton extends JButton {
 		 * SI OCURRE ESTO RETORNA FALSO. 
 		 * */
 		if(model.isPressed() && model.isArmed() ) {
+				//DIBUJAMOS RECTANGULO REDONDEADO NEGRO
+				g.fillRoundRect(xd,yd,width,height, 10,10);
+				//MUEVE CORDENADA ORIGINAL (0,0) A LA POSICION (1,1).
+				// ESTO PROVOCA UN EFECTO VISUAL
+				g.translate(1, 1);
 				//ESTABLECEMOS EL COLOR ROJO OBSCURO
 				g.setColor(Color.red.darker());
 				// DIBUJAMOS RECTANGULO REDONDEADO.
