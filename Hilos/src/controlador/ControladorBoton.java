@@ -3,6 +3,7 @@ package controlador;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import modelo.Cuadrado;
 import vista.VistaInterface;
